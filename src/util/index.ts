@@ -16,7 +16,6 @@ export const imageIsAvaliable = async (filename: string): Promise<boolean> => {
     await fs.access(path.resolve(fullPath, `${filename}.jpg`))
     return true
   } catch (err) {
-    console.log(`Image of ${filename} doesn't exist`)
     return false
   }
 }
@@ -35,7 +34,7 @@ export const createThumb = async ({
   filename,
   width,
   height,
-}: query): Promise<string> => {
+}: query): Promise<string | null> => {
   try {
     const thumb = path.resolve(thumbPath, `${filename}-${width}x${height}.jpg`)
     console.log(`Creating thumb with path: ${thumb}`)
@@ -44,7 +43,7 @@ export const createThumb = async ({
       .toFile(thumb)
     return thumb
   } catch (error) {
-    return 'Thumb not created'
+    return null
   }
 }
 

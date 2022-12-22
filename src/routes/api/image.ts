@@ -26,7 +26,7 @@ image.get('/', async (req: Request, res: Response) => {
       return res.status(200).sendFile(filePath)
     } else {
       const thumb = await createThumb(req.query)
-      if (!(await checkImage(thumb))) {
+      if (!thumb) {
         return res.send('Thumb could not be created')
       }
       return res.status(200).sendFile(thumb)
